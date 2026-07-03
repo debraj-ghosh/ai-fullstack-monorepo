@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from "react";
+import { getHello, saveUser } from "./api/api";
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
@@ -6,9 +7,32 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+
+    getHello()
+      .then(result => setData(result))
+      .catch(error => console.error(error));
+
+  }, []);
 
   return (
     <>
+    <div>
+
+      <h1>React + FastAPI</h1>
+
+      {data && (
+
+        <div>
+          <h2>{data.message}</h2>
+        </div>
+
+      )}
+
+    </div>
+
       <section id="center">
         <div className="hero">
           <img src={heroImg} className="base" width="170" height="179" alt="" />
@@ -16,6 +40,12 @@ function App() {
           <img src={viteLogo} className="vite" alt="Vite logo" />
         </div>
         <div>
+          <button
+            type="button"
+            onClick={() => saveUser({ name: "Debraj" }).catch((error) => console.error(error))}
+          >
+            Save user
+          </button>
           <h1>Get started</h1>
           <p>
             Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
