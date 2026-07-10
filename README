@@ -18,3 +18,23 @@ Kubernetes
 - Agentic AI
 - MCP
 - LangGraph
+
+## Database Migrations
+
+Generate a migration:
+
+```bash
+docker compose exec backend alembic revision --autogenerate -m "Description"
+```
+
+Apply migrations:
+
+```bash
+docker compose exec backend alembic upgrade head
+```
+
+Check current migration:
+
+```bash
+docker compose exec backend alembic current
+```

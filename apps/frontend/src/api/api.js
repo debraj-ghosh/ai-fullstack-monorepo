@@ -1,27 +1,25 @@
-const BASE_URL = import.meta.env.VITE_API_URL;
+import axios from "axios";
 
-export async function getHello() {
-    const response = await fetch(`${BASE_URL}/api/hello`);
+const api = axios.create({
+    baseURL: import.meta.env.VITE_API_URL,
+    headers: {
+        "Content-Type": "application/json",
+    },
+});
 
-    if (!response.ok) {
-        throw new Error("Failed to fetch");
-    }
+api.interceptors.request.use(
+    (config) => {
 
-    return response.json();
-}
+        const token = localStorage.getItem("access_token");
 
-export async function saveUser(userData = { name: "Debraj" }) {
-    const response = await fetch(`${BASE_URL}/api/user`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(userData)
-    });
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
 
-    if (!response.ok) {
-        throw new Error("Failed to save user");
-    }
+        return config;
+    },
 
-    return response.json();
-}
+    (error) => Promise.reject(error)
+);
+
+export default api;
