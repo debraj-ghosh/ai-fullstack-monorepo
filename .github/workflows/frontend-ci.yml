@@ -1,0 +1,44 @@
+name: Frontend CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - develop
+
+  pull_request:
+    branches:
+      - main
+      - master
+      - develop
+
+jobs:
+
+  frontend:
+
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: apps/frontend
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: apps/frontend/package-lock.json
+
+      - name: Install Packages
+        run: npm install
+
+      - name: Build Application
+        run: npm run build
+
+      # Enable later
+      # - name: Run Tests
+      #   run: npm test

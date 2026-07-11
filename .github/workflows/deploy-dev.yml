@@ -1,0 +1,19 @@
+name: Deploy Development
+
+on:
+
+  workflow_dispatch:
+
+jobs:
+
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Placeholder
+
+        run: |
+
+          echo "Development deployment will be added during Kubernetes + AWS"
