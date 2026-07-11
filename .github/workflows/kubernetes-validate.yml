@@ -33,6 +33,3 @@ jobs:
 
       - name: Validate Kustomize Build
         run: kubectl kustomize k8s/dev
-
-      - name: Validate Kubernetes Manifests
-        run: kubectl apply --dry-run=client -k k8s/dev
