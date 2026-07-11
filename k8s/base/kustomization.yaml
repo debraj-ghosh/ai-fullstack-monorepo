@@ -5,32 +5,23 @@ kind: Kustomization
 namespace: ai-fullstack
 
 resources:
+  - namespace
+  - configmap
+  - secrets
+  - storage
+  - postgres
+  - redis
+  - backend
+  - frontend
+  - ingress
 
-  - namespace/namespace.yaml
-
-  - configmap/backend-config.yaml
-
-  - secrets/backend-secret.yaml
-
-  - storage/postgres-pv.yaml
-  - storage/postgres-pvc.yaml
-
-  - postgres/
-  - redis/
-  - backend/
-  - frontend/
-  - ingress/
-
-commonLabels:
-
-  app.kubernetes.io/name: ai-fullstack
-
-  app.kubernetes.io/managed-by: kustomize
-
-  app.kubernetes.io/version: "1.0.0"
+labels:
+  - pairs:
+      app.kubernetes.io/name: ai-fullstack
+      app.kubernetes.io/managed-by: kustomize
+      app.kubernetes.io/version: "1.0.0"
 
 images:
-
   - name: backend
     newTag: latest
 
