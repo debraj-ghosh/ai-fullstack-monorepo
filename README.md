@@ -15,6 +15,7 @@ A production-ready Full Stack AI application built using modern technologies inc
 
 [![Security Scan](https://github.com/debraj-ghosh/ai-fullstack-monorepo/actions/workflows/security-scan.yml/badge.svg)](https://github.com/debraj-ghosh/ai-fullstack-monorepo/actions/workflows/security-scan.yml)
 
+[![Kubernetes Validation](https://github.com/debraj-ghosh/ai-fullstack-monorepo/actions/workflows/kubernetes-validate.yml/badge.svg)](https://github.com/debraj-ghosh/ai-fullstack-monorepo/actions/workflows/kubernetes-validate.yml)
 ---
 
 # Project Overview
