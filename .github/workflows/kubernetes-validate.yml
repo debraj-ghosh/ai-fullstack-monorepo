@@ -1,0 +1,38 @@
+name: Kubernetes Validation
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - develop
+
+  pull_request:
+    branches:
+      - main
+      - master
+      - develop
+
+jobs:
+  validate:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install kubectl
+        uses: azure/setup-kubectl@v4
+        with:
+          version: latest
+
+      - name: Verify kubectl Installation
+        run: kubectl version --client
+
+      - name: Validate Kustomize Build
+        run: kubectl kustomize k8s/dev
+
+      - name: Validate Kubernetes Manifests
+        run: kubectl apply --dry-run=client -k k8s/dev
