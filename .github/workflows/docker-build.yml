@@ -1,12 +1,13 @@
 name: Docker Build
 
 on:
-  workflow_run:
-    workflows:
-      - Backend CI
-      - Frontend CI
-    types:
-      - completed
+  push:
+    branches:
+      - main
+      - master
+      - develop
+
+  workflow_dispatch:
 
 jobs:
   docker:
@@ -62,6 +63,8 @@ jobs:
           context: ./apps/backend
           platforms: linux/amd64
           push: true
+          provenance: false
+          no-cache: true
           tags: |
             800075447293.dkr.ecr.ap-south-1.amazonaws.com/backend:latest
 
@@ -75,5 +78,7 @@ jobs:
           context: ./apps/frontend
           platforms: linux/amd64
           push: true
+          provenance: false
+          no-cache: true
           tags: |
             800075447293.dkr.ecr.ap-south-1.amazonaws.com/frontend:latest
