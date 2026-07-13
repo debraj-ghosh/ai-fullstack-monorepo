@@ -1,9 +1,11 @@
 services:
 
   frontend:
+    image: 800075447293.dkr.ecr.ap-south-1.amazonaws.com/frontend:latest
     restart: always
 
   backend:
+    image: 800075447293.dkr.ecr.ap-south-1.amazonaws.com/backend:latest
     restart: always
 
   postgres:
